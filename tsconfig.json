@@ -1,0 +1,30 @@
+{
+    "baseUrl": "types",
+    "typeRoots": ["types"],
+    "compilerOptions": {
+      "jsx": "react",
+      "forceConsistentCasingInFileNames": true,
+      "noImplicitReturns": true,
+      "noImplicitThis": true,
+      "noImplicitAny": true,
+      "importHelpers": true,
+      "strictNullChecks": false,
+      "suppressImplicitAnyIndexErrors": true,
+      "noUnusedLocals": true,
+      "allowSyntheticDefaultImports": true
+    },
+    "indent": [
+        true,
+        "spaces",
+        4
+    ],
+    "exclude": [
+      "node_modules",
+      "build",
+      "scripts",
+      "acceptance-tests",
+      "webpack",
+      "jest",
+      "src/setupTests.ts"
+    ]
+  }
