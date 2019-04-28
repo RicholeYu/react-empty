@@ -11,7 +11,12 @@
       "strictNullChecks": false,
       "suppressImplicitAnyIndexErrors": true,
       "noUnusedLocals": true,
-      "allowSyntheticDefaultImports": true
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "baseUrl": "src",
+      "paths": {
+        "@/*": ["./*"]
+      }
     },
     "indent": [
         true,
@@ -24,7 +29,6 @@
       "scripts",
       "acceptance-tests",
       "webpack",
-      "jest",
-      "src/setupTests.ts"
+      "jest"
     ]
   }

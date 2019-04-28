@@ -1,9 +1,8 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-// import AsyncComponent from './common/AsyncComponent'
-const Index = () => import('./pages/Index')
-const About = () => import('./pages/About')
-const Play = () => import('./pages/Play')
+import {
+    BrowserRouter as Router, Route
+} from 'react-router-dom'
+import AsyncComponent from '@/common/AsyncComponent'
 import Header from './pages/Header'
 export default class AppRouter extends React.Component {
     public render () {
@@ -11,9 +10,9 @@ export default class AppRouter extends React.Component {
             <Router>
                 <Header />
                 <div>
-                    <Route path="/" exact component={Index} />
-                    <Route path="/about" component={About} />
-                    <Route path="/play" component={Play} />
+                    <Route path="/" exact component={AsyncComponent(() => import('./pages/Index'))} />
+                    <Route path="/about" component={AsyncComponent(() => import('./pages/About'))} />
+                    <Route path="/play" component={AsyncComponent(() => import('./pages/Play'))} />
                 </div>
             </Router>
         )

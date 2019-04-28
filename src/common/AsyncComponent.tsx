@@ -1,26 +1,37 @@
 import React from 'react'
 
-interface state {
-    Component: any,
+interface EsModule {
+    default: any
+}
+
+interface State {
+    Component: React.ComponentClass,
     load: Boolean
 }
 
-export default class AsyncComponent extends React.Component<any, state> {
-    public state = {
-        load: false,
-        Component: React.Component
-    }
+export default function asyncComponent (importComponet: Function):React.ComponentClass {
+    return class AsyncComponent extends React.Component<{}, State> {
+        state = {
+            Component: React.Component,
+            load: false
+        }
 
-    componentDidMount () {
-        this.props.importComponent()
-            .then((module: any) => this.setState({
-                load: true,
-                Component: module.default
-            }))
-    }
+        componentWillMount () {
+            importComponet()
+                .then((module: EsModule) => module.default)
+                .then((Component: React.ComponentClass) => {
+                    this.setState({
+                        Component,
+                        load: true
+                    })
+                })
+        }
 
-    render () {
-        const { Component, load } = this.state
-        return load ? <Component {...this.props} /> : null
+        render () {
+            const {
+                Component, load
+            } = this.state
+            return load ? <Component /> : <div />
+        }
     }
 }

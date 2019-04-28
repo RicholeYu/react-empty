@@ -1,9 +1,42 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-export default class Play extends React.Component {
-    public render () {
+interface props {
+    age?: number,
+    addAge?: Function,
+    handlerClick?: Function
+}
+
+const mapStateToProps = ({ user }: object, props):props => {
+    console.log(user, props)
+    return {
+        age: user.age
+    }
+}
+
+const mapDispatchToProps = (dispatch, props):props => {
+    console.log(dispatch, props)
+    return {
+        addAge: (age: Number) => {
+            console.log(age)
+            dispatch({
+                type: 'setAge',
+                age
+            })
+        }
+    }
+}
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Index extends React.Component<props> {
+    handlerClick = () => {
+        this.props.addAge(this.props.age + 1)
+    }
+    render () {
         return (
-            <div>Index Pages</div>
+            <div onClick={this.handlerClick}>Index Pages, {this.props.age}</div>
         )
     }
 }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Index)
+

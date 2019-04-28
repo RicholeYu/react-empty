@@ -51,23 +51,23 @@ module.exports = {
         "semi": ["error", "never"],
         "no-multiple-empty-lines": ["error", {"max": 1}],
         "generator-star-spacing": ["error", { "before": true, "after": true }],
-        "object-curly-newline": ["error", {
-            "ObjectExpression": "always",
-            "ObjectPattern": {
-                "multiline": false,
-            }
-        }],
+        "object-curly-newline": ["error", { "consistent": true, "minProperties": 2 }],
         "object-curly-spacing": ["error", "always"],
         "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
         "linebreak-style": ["error", "windows"],
         "eol-last": ["error", "windows"],
         "object-property-newline": ["error", {}],
+        "space-infix-ops": 2,
         'react/jsx-indent': [
             'error',
             4
         ],
         "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".tsx"] }],
         "react/jsx-closing-tag-location": 2,
+        "react/self-closing-comp": ["error", {
+            "component": true,
+            "html": true
+        }],
         "react/jsx-tag-spacing": ["error", {
 			"closingSlash": "never",
 			"beforeSelfClosing": "always",
@@ -85,6 +85,7 @@ module.exports = {
     globals: {
         require: true,
         process: true,
-        module: true
+        module: true,
+        EventEmitter: true
     }
 }
