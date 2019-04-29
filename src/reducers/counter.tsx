@@ -1,6 +1,8 @@
-export default (state = {
-    count: 0
-}, action) => {
+interface action {
+    type: string,
+    count: number,
+}
+export default (state = { count: 0 }, action: action) => {
     switch (action.type) {
     case 'add':
         state.count++
@@ -11,4 +13,5 @@ export default (state = {
     default:
         return state
     }
+    return state
 }

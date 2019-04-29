@@ -5,33 +5,27 @@ interface EsModule {
 }
 
 interface State {
-    Component: React.ComponentClass,
-    load: Boolean
+    Component: React.ComponentClass | null
 }
 
-export default function asyncComponent (importComponet: Function):React.ComponentClass {
+export default function asyncComponent (importComponet: Function, props = {}):React.ComponentClass {
     return class AsyncComponent extends React.Component<{}, State> {
         state = {
-            Component: React.Component,
-            load: false
+            Component: null
         }
-
         componentWillMount () {
             importComponet()
                 .then((module: EsModule) => module.default)
                 .then((Component: React.ComponentClass) => {
                     this.setState({
-                        Component,
-                        load: true
+                        Component
                     })
                 })
         }
 
         render () {
-            const {
-                Component, load
-            } = this.state
-            return load ? <Component /> : <div />
+            const { Component } = this.state
+            return Component ? <Component {...props} /> : <div />
         }
     }
 }

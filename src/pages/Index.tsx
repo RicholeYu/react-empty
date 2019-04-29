@@ -1,42 +1,20 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
+// eslint-disable-next-line no-unused-vars
+import { user } from '../store/user'
+import { observer } from 'mobx-react'
 interface props {
-    age?: number,
-    addAge?: Function,
-    handlerClick?: Function
+    handlerClick?: Function,
+    user: user
 }
-
-const mapStateToProps = ({ user }: object, props):props => {
-    console.log(user, props)
-    return {
-        age: user.age
-    }
-}
-
-const mapDispatchToProps = (dispatch, props):props => {
-    console.log(dispatch, props)
-    return {
-        addAge: (age: Number) => {
-            console.log(age)
-            dispatch({
-                type: 'setAge',
-                age
-            })
-        }
-    }
-}
-@connect(mapStateToProps, mapDispatchToProps)
-export default class Index extends React.Component<props> {
+@observer class Index extends React.Component<props> {
     handlerClick = () => {
-        this.props.addAge(this.props.age + 1)
+        this.props.user.setAge(this.props.user.age + 1)
     }
     render () {
         return (
-            <div onClick={this.handlerClick}>Index Pages, {this.props.age}</div>
+            <a href="javascript:;" onClick={this.handlerClick}>Index Pages, {this.props.user.age}</a>
         )
     }
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Index)
-
+export default Index
